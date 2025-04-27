@@ -1,0 +1,78 @@
+<view class="container">
+  <!-- 用户信息部分 -->
+  <view class="user-info">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.jpg'}}" bindtap="viewUserInfo"></image>
+    <view class="user-details">
+      <text class="username">{{userInfo.nickName || '冥想用户'}}</text>
+      <view class="level-info">
+        <text class="user-level">冥想等级 {{userInfo.level}}</text>
+        <view class="exp-progress">
+          <view class="exp-bar" style="width: {{totalStats.levelProgress * 100}}%"></view>
+        </view>
+        <text class="exp-text">{{totalStats.meditationExp}}/{{totalStats.nextLevelExp}} 经验</text>
+      </view>
+    </view>
+    <view bindtap="viewUserInfo" class="settings-icon">
+      <text class="icon-settings"></text>
+    </view>
+  </view>
+
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-title">个人中心</view>
+  </view>
+
+  <!-- 统计数据部分 -->
+  <view class="stats-section">
+    <view class="stats-title">冥想统计</view>
+    <view class="time-range-selector">
+      <view class="{{currentTimeRange === 'week' ? 'range-active' : ''}}" bindtap="switchTimeRange" data-range="week">本周</view>
+      <view class="{{currentTimeRange === 'month' ? 'range-active' : ''}}" bindtap="switchTimeRange" data-range="month">本月</view>
+      <view class="{{currentTimeRange === 'year' ? 'range-active' : ''}}" bindtap="switchTimeRange" data-range="year">今年</view>
+      <view class="{{currentTimeRange === 'all' ? 'range-active' : ''}}" bindtap="switchTimeRange" data-range="all">全部</view>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{currentStats.totalSessions}}</text>
+        <text class="stat-label">冥想次数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{currentStats.totalMinutes}}</text>
+        <text class="stat-label">冥想时长(分钟)</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{currentStats.streakDays}}</text>
+        <text class="stat-label">连续天数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{currentStats.totalDays}}</text>
+        <text class="stat-label">累计天数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口部分 -->
+  <view class="function-section">
+    <view class="function-title">冥想工具</view>
+    <view class="function-grid">
+      <view class="function-item" bindtap="goToMeditationDiary">
+        <view class="function-icon diary-icon"></view>
+        <text class="function-name">冥想日记</text>
+        <text class="function-desc">记录冥想感受与收获</text>
+      </view>
+      <!-- 预留其他功能入口 -->
+    </view>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-nav">
+    <view bindtap="goToIndex" class="nav-item">
+      <text class="icon-home"></text>
+      <text>首页</text>
+    </view>
+    <view class="nav-item active">
+      <text class="icon-profile"></text>
+      <text>个人</text>
+    </view>
+  </view>
+</view> 

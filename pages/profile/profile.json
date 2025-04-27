@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "个人中心",
+  "navigationBarBackgroundColor": "#8e7cc3",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#F6F8FF",
+  "backgroundTextStyle": "light",
+  "disableScroll": false,
+  "usingComponents": {},
+  "navigationStyle": "custom",
+  "renderer": "skyline"
+} 

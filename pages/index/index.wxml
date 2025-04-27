@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">冥想助手</text>
+    <text class="subtitle">每日心灵放松</text>
+  </view>
+  
+  <view class="quote-container">
+    <text class="quote">"{{quote.text}}"</text>
+    <text class="quote-author">— {{quote.author}}</text>
+  </view>
+  
+  <view class="stats-container">
+    <view class="stat-item">
+      <text class="stat-value">{{stats.sessions}}</text>
+      <text class="stat-label">冥想次数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.minutes}}</text>
+      <text class="stat-label">冥想分钟</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.days}}</text>
+      <text class="stat-label">连续天数</text>
+    </view>
+  </view>
+  
+  <view class="mode-container">
+    <view bindtap="navigateToWorkday" class="mode-card workday">
+      <view class="mode-content">
+        <text class="mode-title">工作日冥想</text>
+        <text class="mode-desc">专注提升，减轻压力</text>
+        <image src="/assets/icons/workday.jpg" class="icon"></image>
+      </view>
+    </view>
+    
+    <view bindtap="navigateToRestday" class="mode-card restday">
+      <view class="mode-content">
+        <text class="mode-title">休息日冥想</text>
+        <text class="mode-desc">身心放松，深度恢复</text>
+        <image src="/assets/icons/restday.jpg" class="icon"></image>
+      </view>
+    </view>
+  </view>
+</view>
