@@ -1,0 +1,114 @@
+/* 导入本地字体文件 */
+@import "../assets/fonts/iconfont.wxss";
+
+/* 扩展额外的图标 */
+.iconfont {
+  font-size: 32rpx;
+}
+
+/* 个人中心图标 */
+.icon-user:before {
+  content: "\e7ae";
+}
+
+/* 设置图标 */
+.icon-settings:before {
+  content: "\e78e";
+}
+
+/* 冥想图标 */
+.icon-meditation:before {
+  content: "\e678";
+}
+
+/* 日历图标 */
+.icon-calendar:before {
+  content: "\e7d3";
+}
+
+/* 时钟图标 */
+.icon-time:before {
+  content: "\e784";
+}
+
+/* 统计图标 */
+.icon-stats:before {
+  content: "\e7af";
+}
+
+/* 关闭图标 */
+.icon-close:before {
+  content: "\e7fc";
+}
+
+/* 左箭头 */
+.icon-left:before {
+  content: "\e7ed";
+}
+
+/* 右箭头 */
+.icon-right:before {
+  content: "\e7ee";
+}
+
+/* 打勾图标 */
+.icon-check:before {
+  content: "\e7fc";
+}
+
+/* 记录图标 */
+.icon-record:before {
+  content: "\e7a6";
+}
+
+/* 空状态图标 */
+.icon-empty:before {
+  content: "\e7df";
+}
+
+/* 注意力图标 */
+.icon-focus:before {
+  content: "\e7cf";
+}
+
+/* 笔记图标 */
+.icon-note:before {
+  content: "\e7b9";
+}
+
+/* 开始图标 */
+.icon-play:before {
+  content: "\e7fe";
+}
+
+/* 暂停图标 */
+.icon-pause:before {
+  content: "\e7fd";
+}
+
+/* 心情图标 */
+.icon-mood:before {
+  content: "\e7e0";
+}
+
+/* 天数图标 */
+.icon-days:before {
+  content: "\e7b1";
+}
+
+/* 时长图标 */
+.icon-duration:before {
+  content: "\e7c9";
+}
+
+.icon-timer:before {
+  content: "\e651";
+}
+
+.icon-sessions:before {
+  content: "\e60a";
+}
+
+.icon-quote:before {
+  content: "\e635";
+} 

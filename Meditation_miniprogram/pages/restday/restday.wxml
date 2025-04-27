@@ -1,0 +1,124 @@
+<view class="container {{currentScene}} {{hideControls ? 'no-disturb' : ''}} {{step === 'meditation' ? 'meditation-mode' : ''}}" style="{{step === 'meditation' && meditationBackground ? 'background-image: url(' + meditationBackground + ');' : ''}}">
+  <view class="nav-bar {{hideControls ? 'hidden' : ''}}">
+    <view class="back-btn" bindtap="navigateBack">
+      <image src="/assets/icons/back.png" class="back-icon"></image>
+      <text class="back-text">返回</text>
+    </view>
+  </view>
+  
+  <block wx:if="{{step === 'scene_selection'}}">
+    <view class="header">
+      <text class="title">选择冥想场景</text>
+    </view>
+    
+    <view class="scene-selection">
+      <scroll-view scroll-x="true" class="scene-scroll">
+        <view class="scene-card-container">
+          <view class="card scene-card {{currentScene === 'beach' ? 'selected' : ''}}" 
+                bindtap="selectScene" data-scene="beach">
+            <image src="/assets/images/beach.jpg" class="scene-image" mode="aspectFill"></image>
+            <text class="scene-title">海岸沙滩</text>
+          </view>
+          
+          <view class="card scene-card {{currentScene === 'forest' ? 'selected' : ''}}" 
+                bindtap="selectScene" data-scene="forest">
+            <image src="/assets/images/forest.jpg" class="scene-image" mode="aspectFill"></image>
+            <text class="scene-title">森林</text>
+          </view>
+          
+          <view class="card scene-card {{currentScene === 'grassland' ? 'selected' : ''}}" 
+                bindtap="selectScene" data-scene="grassland">
+            <image src="/assets/images/grassland.jpg" class="scene-image" mode="aspectFill"></image>
+            <text class="scene-title">草原</text>
+          </view>
+        </view>
+      </scroll-view>
+      
+      <view class="indicator-dots">
+        <view class="dot {{currentScene === 'beach' ? 'active' : ''}}"></view>
+        <view class="dot {{currentScene === 'forest' ? 'active' : ''}}"></view>
+        <view class="dot {{currentScene === 'grassland' ? 'active' : ''}}"></view>
+      </view>
+    </view>
+
+    <view class="scene-description">
+      <block wx:if="{{currentScene === 'beach'}}">
+        <text class="description-text">海岸沙滩 - 聆听海浪声，感受阳光与沙滩，体验无尽的平静。</text>
+      </block>
+      <block wx:if="{{currentScene === 'forest'}}">
+        <text class="description-text">森林 - 在古老树木间漫步，聆听鸟鸣与溪流，感受大自然的生命力。</text>
+      </block>
+      <block wx:if="{{currentScene === 'grassland'}}">
+        <text class="description-text">草原 - 体验无边无际的开阔感，让心灵如同草原一样自由舒展。</text>
+      </block>
+    </view>
+    
+    <view class="guidance-speed">
+      <text class="speed-title">引导语速度:</text>
+      <view class="speed-options">
+        <view class="speed-option {{guidanceSpeed === 'slow' ? 'active' : ''}}" 
+              bindtap="changeGuidanceSpeed" data-speed="slow">慢速</view>
+        <view class="speed-option {{guidanceSpeed === 'standard' ? 'active' : ''}}" 
+              bindtap="changeGuidanceSpeed" data-speed="standard">标准</view>
+        <view class="speed-option {{guidanceSpeed === 'fast' ? 'active' : ''}}" 
+              bindtap="changeGuidanceSpeed" data-speed="fast">快速</view>
+      </view>
+    </view>
+    
+    <view class="button start-btn" bindtap="startMeditation">
+      开始冥想
+    </view>
+  </block>
+  
+  <block wx:if="{{step === 'meditation'}}">
+    <view class="content {{hideControls ? 'fullscreen' : ''}}" style="{{meditationBackground ? 'background-image: url(' + meditationBackground + ');' : ''}}">
+      <view class="card guidance-card {{showQuestion ? 'minimized' : ''}}" style="min-width: 620rpx; min-height: 300rpx;">
+        <text class="guidance-text">{{currentGuidance}}</text>
+      </view>
+      
+      <view class="card question-card {{showQuestion ? '' : 'hidden'}}" wx:if="{{showQuestion}}">
+        <text class="question-title">思考</text>
+        <text class="question-text">{{currentQuestion}}</text>
+      </view>
+      
+      <view class="progress-container">
+        <view class="time-display">
+          <text class="time-text">{{Math.floor(elapsedTime / 60)}}:{{(elapsedTime % 60) < 10 ? '0' + (elapsedTime % 60):(elapsedTime % 60)}}</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress" style="width: {{progress}}%; transition: width 1s linear;"></view>
+        </view>
+        <view class="time-display">
+          <text class="time-text">{{Math.floor(totalDuration / 60)}}:00</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="controls {{hideControls ? 'hidden' : ''}}">
+      <view class="volume-controls">
+        <text class="volume-label">主音量</text>
+        <slider min="0" max="1" step="0.1" value="{{audioSettings.masterVolume}}" 
+                bindchange="adjustVolume" data-type="master" show-value="{{false}}" 
+                activeColor="#FFFFFF" backgroundColor="rgba(255,255,255,0.3)" block-size="20" block-color="#FFFFFF"/>
+                
+        <text class="volume-label">引导语音量</text>
+        <slider min="0" max="1" step="0.1" value="{{audioSettings.guidanceVolume}}" 
+                bindchange="adjustVolume" data-type="guidance" show-value="{{false}}" 
+                activeColor="#FFFFFF" backgroundColor="rgba(255,255,255,0.3)" block-size="20" block-color="#FFFFFF"/>
+      </view>
+      
+      <view class="main-controls">
+        <view class="control-btn {{isPlaying ? 'playing' : ''}}" bindtap="togglePlay">
+          <image src="{{isPlaying ? '/assets/icons/pause.jpg' : '/assets/icons/play.jpg'}}" class="control-icon"></image>
+        </view>
+        
+        <view class="control-btn" bindtap="toggleNoDisturbMode">
+          <image src="{{hideControls ? '/assets/icons/show.png' : '/assets/icons/hide.png'}}" class="control-icon"></image>
+        </view>
+      </view>
+    </view>
+  </block>
+  
+  <!-- 无干扰模式下的触摸层，点击后显示控制 -->
+  <view class="touch-layer {{hideControls ? '' : 'hidden'}}" bindtap="toggleNoDisturbMode"></view>
+</view> 
